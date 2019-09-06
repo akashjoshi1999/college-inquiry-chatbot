@@ -1,0 +1,19 @@
+{"intents": [
+    {"tag": "gretting",
+     "patterns": ["Hi","hey", "hii","hyy","hello", "hy", "anyone is there?", "Is anyone there?", "Good day"],
+     "responses": ["Hello, thanks for visiting", "Good to see you again", "Hi there, how can I help?"],
+    },
+    {"tag": "greeting",
+     "patterns": ["How are you","how is everything?","how are you doing?","how is it going?","you all right?","hoe have you been?"],
+     "responses": ["i am doing good", "i am fine", "everything is good", "i am alright"],
+    },
+    {"tag": "goodbye",
+     "patterns": ["Bye", "See you later", "Goodbye"],
+     "responses": ["See you later, thanks for visiting", "Have a nice day", "Bye! Come back again soon."]
+    },
+    {"tag": "thanks",
+     "patterns": ["Thanks", "Thank you", "That's helpful"],
+     "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    }
+    ]
+}
