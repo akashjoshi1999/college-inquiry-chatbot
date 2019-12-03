@@ -1,0 +1,8 @@
+pip install numpy
+pip install tensoflow
+pip install panda
+pip install tflearn
+pip install pickle-mixin
+pip install nltk
+pip install flask
+pip install SpeechRecognition
