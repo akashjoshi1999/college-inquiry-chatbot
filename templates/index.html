@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BVM Engineering college</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{#	{% load staticfiles %}#}
+  <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/icomoon/style.css') }}">
+<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/BVM Logo-1.ico') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }} ">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat_ui.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }} ">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }} ">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }} ">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static' , filename='css/jquery.fancybox.min.css') }} ">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datepicker.css') }} ">
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }} ">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }} ">
+  <link href="{{ url_for('static', filename='css/jquery.mb.YTPlayer.min.css') }} " media="all" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }} ">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.convform.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cs/demo.css') }} ">
+<style>
+.open-button {
+ position: fixed;
+right: 28px;
+bottom: 28px;
+width: 280px;
+  cursor: pointer;
+}
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  z-index: 9;
+}
+.form-container-bot {
+  max-width: 0px;
+  padding: 0px;
+  background-color: white;
+}
+
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* The popup chat - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+.form-container-bot textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 100px;
+}
+.form-container textarea:focus {
+    background-color: #ddd;
+  outline: none;
+}
+
+
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+.form-container-bot .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding:10px;
+
+  cursor: pointer;
+  width: %;
+  margin:10px 25px -10px 280px;
+  opacity: 1.0;
+}
+.form-container-bot .cancel {
+  background-color: #181330;
+}
+
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+</style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  <div class="site-wrap">
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+    <div class="py-2 bg-light">
+      <div class="container">
+       <!-- <div class="row align-items-center">
+          <div class="col-lg-3 text-right">
+            <a href="login.html" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
+            </div>
+        </div>-->
+      </div>
+    </div>
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+      <div class="container">
+        <div class="d-flex align-items-center">
+          <div class="mr-auto">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li class="active">
+                  <a href="index.html" class="nav-link text-left">Home</a>
+                </li>
+                <li class="">
+                  <a href="/about" class="nav-link text-left">About Us</a>
+                </li>
+               <li>
+                    <a href="/contact" class="nav-link text-left">Contact</a>
+               </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="ml-auto">
+            <div class="social-wrap">
+              <a href="https://www.facebook.com/BVMEngineeringCollege/"><span class="icon-facebook"></span></a>
+              <a href="https://twitter.com/VishvakarmaBVM"><span class="icon-twitter"></span></a>
+              <a href="https://www.instagram.com/the_b.v.m/?hl=en"><span class="icon-instagram"></span></a>
+              <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black"><span
+                class="icon-menu h3"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="hero-slide owl-carousel site-blocks-cover">
+	  <div class="intro-section" style="background-image: url({{ url_for('static', filename='images/Udaan19.jpg') }});"></div>
+      <div class="intro-section" style="background-image: url({{ url_for('static', filename= 'images/Mega Placement_1.jpg')}});"></div>
+      <div class="intro-section" style="background-image: url({{ url_for('static', filename='images/Mega Placement_2.jpg') }});"></div>
+	  <div class="intro-section" style="background-image: url({{ url_for('static', filename='images/NPTEL_AA_37.jpg' ) }});"></div>
+	  <div class="intro-section" style="background-image: url({{ url_for('static', filename='images/STTP_june2019_2.jpg') }});"></div>
+    </div>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+		   <h3 class="footer-heading"><span>About Our College</span></h3>
+            <p>Birla Vishvakarma Mahavidyalaya Engineering College was established in 1948 from
+			donations made by the Birla Education Trust on the behest of Sardar Vallabhbhai Patel, the first Home Minister of independent India.</p>
+          </div>
+          <div class="col-lg-3">
+            <h3 class="footer-heading"><span>Our Campus</span></h3>
+            <ul class="list-unstyled">
+                <li><a href="#">Acedemic</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Our Interns</a></li>
+                <li><a href="#">Our Leadership</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Human Resources</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3">
+              <h3 class="footer-heading"><span>Our Courses</span></h3>
+              <ul class="list-unstyled">
+                  <li><a href="#">Mathematics</a></li>
+                  <li><a href="#">Civil Engineering</a></li>
+                  <li><a href="#">Electrical Engineering</a></li>
+                  <li><a href="#">Mechanical Engineering</a></li>
+                  <li><a href="#">Computer Engineering</a></li>
+                  <li><a href="#">IT Engineering</a></li>
+				 <li><a href="#">Electronics & comm. Engineering</a></li>
+				 <li><a href="#">Production Engineering</a></li>
+				 <li><a href="#"> Engineering</a></li>
+			  </ul>
+          </div>
+          <div class="col-lg-3">
+              <h3 class="footer-heading"><span>Contact</span></h3>
+              <ul class="list-unstyled">
+                  <li><a href="#">Help Center</a></li>
+                  <li><a href="#">Support Community</a></li>
+                  <li><a href="#">Press</a></li>
+                  <li><a href="#">Share Your Story</a></li>
+                  <li><a href="#">Our Supporters</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <div style="height:100%; width:100%;" onclick="openForm()">
+	<img src="{{ url_for('static', filename='images/BVM Logo-1.png') }}" style="position:fixed; float:right; right:10px; cursor:pointer; bottom:10px; z-index:2; height:auto; width:100px;">
+  </div>
+
+  <div class="chat-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h1>Chat</h1>
+
+    <label for="msg"><b>Message</b></label>
+    <textarea placeholder="Type message.." name="msg" required></textarea>
+
+    <button type="submit" class="btn">Send</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+
+{#    <section id="demo">#}
+{#	    <div class="vertical-align">#}
+{#	            <div class="row">#}
+{#	                <div class="col-sm-12">#}
+{#	                    <div class="card no-border">#}
+{#	                        <div id="chat" class="conv-form-wrapper">#}
+{#	                            <form action="" method="GET" class="hidden">#}
+{#	                                <input type="text" name="name" data-conv-question="Alright! First, tell me your full name, please.|Okay! Please, tell me your name first.">#}
+{#	                                <input type="text" data-conv-question="Howdy, {name}:0! It's a pleasure to meet you. (note that this question doesn't expect any answer)" data-no-answer="true">#}
+{#	                                <input data-conv-question="Type in your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" id="email" type="email" name="email" required placeholder="What's your e-mail?">#}
+{#	                                <input data-conv-question="Now tell me a secret (like a password)" type="password" data-minlength="6" id="senha" name="password" required placeholder="password">#}
+{#	                            </form>#}
+{#	                        </div>#}
+{#	                    </div>#}
+{#	                </div>#}
+{#	            </div>#}
+{#	    </div>#}
+{#	</section>#}
+{#    	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.12.3.min.js') }}"></script>#}
+{#	<script type="text/javascript" src="{{ url_for('static', filename='js/autosize.min.js') }} "></script>#}
+{#	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.convform.js') }}"></script>#}
+</div>
+
+  <script>
+function openForm() {
+  //document.getElementById("myForm").style.display = "block";
+    window.open('home','Chat','width=600,height=400')
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
+</script>
+<!--  <script>-->
+<!--		function google(stateWrapper, ready) {-->
+<!--			window.open("https://google.com");-->
+<!--			ready();-->
+<!--		}-->
+<!--		function bing(stateWrapper, ready) {-->
+<!--			window.open("https://bing.com");-->
+<!--			ready();-->
+<!--		}-->
+<!--		var rollbackTo = false;-->
+<!--		var originalState = false;-->
+<!--		function storeState(stateWrapper, ready) {-->
+<!--			rollbackTo = stateWrapper.current;-->
+<!--			console.log("storeState called: ",rollbackTo);-->
+<!--			ready();-->
+<!--		}-->
+<!--		function rollback(stateWrapper, ready) {-->
+<!--			console.log("rollback called: ", rollbackTo, originalState);-->
+<!--			console.log("answers at the time of user input: ", stateWrapper.answers);-->
+<!--			if(rollbackTo!=false) {-->
+<!--				if(originalState==false) {-->
+<!--					originalState = stateWrapper.current.next;-->
+<!--						console.log('stored original state');-->
+<!--				}-->
+<!--				stateWrapper.current.next = rollbackTo;-->
+<!--				console.log('changed current.next to rollbackTo');-->
+<!--			}-->
+<!--			ready();-->
+<!--		}-->
+<!--		function restore(stateWrapper, ready) {-->
+<!--			if(originalState != false) {-->
+<!--				stateWrapper.current.next = originalState;-->
+<!--				console.log('changed current.next to originalState');-->
+<!--			}-->
+<!--			ready();-->
+<!--		}-->
+<!--	</script>-->
+{#	<script>#}
+{#		jQuery(function($){#}
+{#			convForm = $('#chat').convform({selectInputStyle: 'disable'});#}
+{#			console.log(convForm);#}
+{#		});#}
+{#	</script>#}
+
+  <script src="{{ url_for('static', filename= 'js/jquery-3.3.1.min.js')}} "></script>
+  <script src="{{ url_for('static', filename= 'js/jquery-migrate-3.0.1.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }} "></script>
+  <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+  <script src="{{ url_for('static', filename= 'js/jquery.stellar.min.js')}} "></script>
+  <script src="{{ url_for('static', filename='js/jquery.countdown.min.js') }}"></script>
+  <script src="{{ url_for('static', filename= 'js/bootstrap-datepicker.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.fancybox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.mb.YTPlayer.min.js') }}"></script>
+  <script src="{{ url_for('static', filename= 'js/main.js')}} "></script>
+</body>
+</html>

@@ -6,8 +6,11 @@ import numpy
 import tflearn
 import tensorflow
 import random
-import json
+import os
+#import json
 import pickle
+
+os.environ["KMP_AFFINITY"] = "disabled"
 
 dataset = pd.read_json("intent1.json", encoding="ISO-8859-1")
 #dataset = pd.read_json("intent1.json", encoding="UTF-8")
@@ -76,11 +79,11 @@ net = tflearn.regression(net)
 
 model = tflearn.DNN(net)
 
-# try:
-#      model.load("model.tflearn")
-# except:
-model.fit(training, output, n_epoch=25000, batch_size=60, show_metric=True)
-model.save("model.tflearn")
+try:
+    model.load("model.tflearn")
+except:
+    model.fit(training, output, n_epoch=50000, batch_size=65, show_metric=True)
+    model.save("model.tflearn")
 
 def bag_of_words(s, words):
      bag = [0 for _ in range(len(words))]
@@ -95,6 +98,20 @@ def bag_of_words(s, words):
 
      return numpy.array(bag)
 
+def chatResp(inp):
+    results = model.predict([bag_of_words(inp, words)])
+    results_index = numpy.argmax(results)
+    tag = labels[results_index]
+    responses=[]
+    for tg in dataset["intents"]:
+        if tg['tag'] == tag:
+            responses.extend(tg['responses'])
+
+        # else:
+        #     responses = "will let you know in sometimme"
+
+    return random.choice(responses)
+
 
 def chat():
     print("Start talking with the bot (type quit to stop)!")
@@ -102,15 +119,8 @@ def chat():
         inp = input("You: ")
         if inp.lower() == "quit":
             break
+        print(chatResp(inp))
 
-        results = model.predict([bag_of_words(inp, words)])
-        results_index = numpy.argmax(results)
-        tag = labels[results_index]
 
-        for tg in dataset["intents"]:
-            if tg['tag'] == tag:
-                responses = tg['responses']
 
-        print(random.choice(responses))
-
-chat()
+#chat()
